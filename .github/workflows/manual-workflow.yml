@@ -1,13 +1,20 @@
 name: Manual Workflow
 
+
 on: [push, workflow_dispatch]
 
 jobs:
-  first_job:
-    name: Run First Job
+  check_variable:
+    name: Conditional Job
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: First
-        run: echo "First Workflow is running"
+      - name: Print Greeting
+        run: echo "Hello, ${{ github.actor }}!"
+      
+      - name: Execute if Not Default User
+        run: echo "This step runs only if actor is not 'Executer'"
+        if: github.actor != 'Executer'
+
+      - name: Skip Step Example
+        run: echo "You should not see this if actor is 'Executer'"
+        if: github.actor == 'Executer'
