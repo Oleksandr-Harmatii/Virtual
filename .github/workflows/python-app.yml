@@ -37,3 +37,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: example/coverage_io/
           fail_ci_if_error: true
+      - name: Debug directory structure
+        run: ls -R
