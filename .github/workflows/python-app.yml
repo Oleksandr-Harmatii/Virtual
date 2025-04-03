@@ -1,47 +1,39 @@
 name: Virtual work
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  schedule:
-    - cron: '30 14 * * 3'
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Олександр'
-        required: true
-        default: 'Executer'
-
-permissions:
-  contents: read
+on: [push, pull_request]
 
 jobs:
-  build:
+  test:
+    name: Run Tests and Upload Coverage
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
+
       - name: Install dependencies
         run: |
-            python -m pip install --upgrade pip
-            pip install flask requests flake8 pytest
-            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
-        
-      - name: Lint with flake8
+          python -m pip install --upgrade pip
+          pip install pytest coverage
+
+      - name: Run Tests
         run: |
-          # Перевірка на синтаксичні помилки та невизначені імена
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # Інші помилки відображаються як попередження
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with pytest
+          cd example/coverage_io/
+          pytest test.py -v
+
+      - name: Generate Coverage Report
         run: |
-          pytest
-      - name: Run Python
-        run: |
-          python ./Lab_1/app.py  # Запускаємо Python файл з потрібної директорії
+          cd example/coverage_io/
+          coverage run -m unittest -v
+          coverage xml
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: example/coverage_io/
+          fail_ci_if_error: true
