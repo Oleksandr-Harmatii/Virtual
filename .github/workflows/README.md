@@ -1,1 +1,2 @@
 [![Virtual work](https://github.com/Oleksandr-Harmatii/Virtual/actions/workflows/python-app.yml/badge.svg)](https://github.com/Oleksandr-Harmatii/Virtual/actions/workflows/python-app.yml)
+[![codecov](https://codecov.io/gh/Oleksandr-Harmatii/Virtual/graph/badge.svg?token=72RMMACW7D)](https://codecov.io/gh/Oleksandr-Harmatii/Virtual)
