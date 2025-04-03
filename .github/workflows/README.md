@@ -1,1 +1,1 @@
-[# Virtual](../../README.md)
+[![Virtual work](https://github.com/Oleksandr-Harmatii/Virtual/actions/workflows/python-app.yml/badge.svg)](https://github.com/Oleksandr-Harmatii/Virtual/actions/workflows/python-app.yml)
