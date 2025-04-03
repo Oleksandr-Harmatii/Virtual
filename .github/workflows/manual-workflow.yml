@@ -1,0 +1,13 @@
+name: Manual Workflow
+
+on: [push, workflow_dispatch]
+
+jobs:
+  first_job:
+    name: Run First Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: First
+        run: echo "First Workflow is running"
