@@ -31,11 +31,10 @@ jobs:
           coverage run -m unittest -v
           coverage xml
 
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: example/coverage_io/
-          fail_ci_if_error: true
+          - name: Upload coverage to Codecov
+          uses: codecov/codecov-action@v3
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            fail_ci_if_error: true        
       - name: Debug directory structure
         run: ls -R
