@@ -37,3 +37,20 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Run Python
+      run: |
+        python /Lab_2/app.py  # Запускаємо Пайтон файл, який знаходиться у кореневій папці
+        
+        on:
+          schedule:
+            - cron: '30 14 * * 3'
+            
+            on:
+              workflow_dispatch:
+                inputs:
+                  # Приклад вхідного параметра
+                  name:
+                    description: 'Олександр'
+                    required: true
+                    default: 'Executer'
+            
