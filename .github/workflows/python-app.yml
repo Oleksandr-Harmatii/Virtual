@@ -42,4 +42,4 @@ jobs:
           pytest
       - name: Run Python
         run: |
-          python /Lab_2/app.py  # Запускаємо Python файл з потрібної директорії
+          python ./app.py  # Запускаємо Python файл з потрібної директорії
